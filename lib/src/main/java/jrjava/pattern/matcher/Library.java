@@ -3,8 +3,33 @@
  */
 package jrjava.pattern.matcher;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+@SuppressWarnings({"FieldCanBeLocal"})
 public class Library {
-    public boolean someLibraryMethod() {
-        return true;
+    public String replacesVerbs(String phrase) {
+        String[] verbs = new String[] { "give", "builder", "rejects", "dislikes", "avoids", "know", "loves", "pursues", "desires", "obtain" };
+        String result = phrase;
+
+        if (!phrase.isEmpty()) {
+            String replacement = " yells ";
+            for(String verb: verbs) {
+                String regex = "\s" + verb + "\s";
+                result = result.replaceAll(regex, replacement);
+            }
+        }
+
+        return result;
+    }
+
+    public boolean validUsPhoneNumber(String regexArgument, String phoneNumber) {
+        if (regexArgument.length() > 0 && phoneNumber.length() > 0) {
+            Pattern pattern = Pattern.compile(regexArgument);
+            Matcher matcher = pattern.matcher(phoneNumber);
+            return matcher.matches();
+        }
+
+        return false;
     }
 }
